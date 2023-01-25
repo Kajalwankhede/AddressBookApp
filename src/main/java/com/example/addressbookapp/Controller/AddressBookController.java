@@ -75,5 +75,37 @@ public class AddressBookController {
         ResponseDTO respDTO = new ResponseDTO("Got data by State successfully", addressBookList);
         return new ResponseEntity<ResponseDTO>(respDTO, HttpStatus.OK);
     }
+// creating address book data by using  token
+@PostMapping("/createbytoken")
+    public ResponseEntity<ResponseDTO> createByToken(@Valid @RequestBody AddressBookDTO addressBookDTO) {
+        String token = addressService.createRecordAndToken(addressBookDTO);
+        ResponseDTO response = new ResponseDTO("Token Generted sucessfully", token);
+        return new ResponseEntity<>(response, HttpStatus.OK);
+   }
+   // Getting particular address book data by  token
+ @CrossOrigin
+@GetMapping("/getbytoken/{token}")
+    public ResponseEntity<ResponseDTO> getDetailByToken(@PathVariable String token) {
+        ResponseDTO response = new ResponseDTO("Address Book Data fetched Successfully ",
+                addressService.getRecordByToken(token));
+        return new ResponseEntity<>(response, HttpStatus.OK);
+}
 
+// Update particular address book data data by jwt token
+@PutMapping("/updatebytoken/{token}")
+    public ResponseEntity<ResponseDTO> updatebyToken(@PathVariable String token,
+                                                     @Valid @RequestBody AddressBookDTO addressBookDTO) {
+        ResponseDTO response = new ResponseDTO("Address Book Data Updated Successfully",
+                addressService.updateRecordByToken(token, addressBookDTO));
+        return new ResponseEntity<>(response, HttpStatus.OK);
+}
+
+// Delete particular address book data by token
+@DeleteMapping("/deletebytoken/{token}")
+public ResponseEntity<ResponseDTO> deleteByToken(@PathVariable String token) {
+    addressService.deletePersonRecordByToken(token);
+    ResponseDTO response = new ResponseDTO(" Data Deleted Successfully "+token,true);
+
+    return new ResponseEntity<>(response, HttpStatus.OK);
+}
 }
