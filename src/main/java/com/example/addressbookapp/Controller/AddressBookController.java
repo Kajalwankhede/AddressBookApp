@@ -4,6 +4,7 @@ import com.example.addressbookapp.DTO.ResponseDTO;
 import com.example.addressbookapp.Exception.AddressBookException;
 import com.example.addressbookapp.Model.AddressBook;
 import com.example.addressbookapp.Service.IAddressBookService;
+import com.example.addressbookapp.Util.EmailSenderService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -78,8 +79,8 @@ public class AddressBookController {
 // creating address book data by using  token
 @PostMapping("/createbytoken")
     public ResponseEntity<ResponseDTO> createByToken(@Valid @RequestBody AddressBookDTO addressBookDTO) {
-        String token = addressService.createRecordAndToken(addressBookDTO);
-        ResponseDTO response = new ResponseDTO("Token Generted sucessfully", token);
+        AddressBook addressBook = addressService.createRecordAndToken(addressBookDTO);
+        ResponseDTO response = new ResponseDTO("Token Generted sucessfully", addressBook);
         return new ResponseEntity<>(response, HttpStatus.OK);
    }
    // Getting particular address book data by  token

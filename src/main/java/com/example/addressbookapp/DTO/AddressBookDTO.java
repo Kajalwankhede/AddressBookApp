@@ -1,5 +1,6 @@
 package com.example.addressbookapp.DTO;
 import jakarta.annotation.Nullable;
+import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;
 import lombok.AllArgsConstructor;
@@ -25,7 +26,7 @@ private int id;
     private String zip;
  @Pattern(regexp="^[6-9][0-9]{9}$",message = "Phone number should be 10 digits")
     private String phoneNumber;
-@NotBlank(message = "Email should not be empty")
+@Email(message = "Email should not be empty")
     @Pattern(regexp= "^[a-zA-Z0-9]{3,}([\\\\.\\\\+\\\\-]?[a-zA-Z0-9]{3,})?[@][A-Za-z0-9]{1,}[.][A-Za-z]{2,4}[,]?([.][A-Za-z]{2,4}[.]?)?$",message="Email should not be empty")
     private String email;
 

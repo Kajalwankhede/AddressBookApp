@@ -12,7 +12,7 @@ public interface IAddressBookService {
    public List<AddressBook> getPersonRecordByName(String name);
     public List<AddressBook> getPersonRecordByCity(String city);
     public List<AddressBook> getPersonRecordByState(String state);
-   String createRecordAndToken(AddressBookDTO addressBookDTO);
+   AddressBook createRecordAndToken(AddressBookDTO addressBookDTO);
 
  AddressBook getRecordByToken(String token);
 
